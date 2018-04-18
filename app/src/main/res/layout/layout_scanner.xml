@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <cn.edu.chd.view.YiTitleBar
+        android:id="@+id/ytb_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:id="@+id/openQrCodeScan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="扫一扫" />
+
+    <TextView
+        android:id="@+id/qrCodeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/openQrCodeScan"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:text="这里显示扫描结果" />
+
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/qrCodeText"
+        android:hint="请输入要生成的内容.."
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp" />
+
+    <Button
+        android:id="@+id/CreateQrCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text"
+        android:text="生成二维码" />
+
+    <ImageView
+        android:id="@+id/QrCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/CreateQrCode"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:src="@drawable/ic_launcher" />
+</LinearLayout>

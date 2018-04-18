@@ -1,0 +1,87 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+//apply plugin: 'android-apt'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion 26
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+    defaultConfig {
+        applicationId "cn.edu.chd.yitu"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+MobSDK {
+    appKey "24d0b3b38c608"
+    appSecret "1f9b07ccdc5679705652e2d3481c262f"
+
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            SinaWeibo {
+                appKey "812166477"
+                appSecret "2e4b965b7ec284701eafebab54f8317a"
+                callbackUri "http://www.nwafu.me"
+                shareByAppClient true
+            }
+//            Wechat {
+//                appId "wx4868b35061f87885"
+//                appSecret "64020361b8ec4c99936c0e3999a9f249"
+//            }
+            QQ {
+                appId "1106819492"
+                appKey "DhcBFosWecM3DsLW"
+                shareByAppClient true
+            }
+            QZone {
+                appId "1106819492"
+                appKey "DhcBFosWecM3DsLW"
+
+            }
+            Facebook {
+                appKey "182930435837421"
+                appSecret "d1595e0efe41fdefbf1b6665c3f03541"
+                callbackUri "http://www.nwafu.me"
+            }
+
+            Yixin {
+                appId "yx485eea3d5f454fb5a28635dffd17877b"
+            }
+            ShortMessage {}
+            Email {}
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile 'com.android.support:multidex:1.0.3'
+
+    compile 'com.google.zxing:core:3.3.0'
+    //butterknife注解框架
+    compile 'com.jakewharton:butterknife:8.2.1'
+//    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
+}
