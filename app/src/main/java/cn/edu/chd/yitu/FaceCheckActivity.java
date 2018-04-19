@@ -27,6 +27,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class FaceCheckActivity extends Activity {
     private Intent intent;
+    private Intent back_intent;
     private Bundle bundle;
     private Button button;
     private Button button_share;
@@ -40,12 +41,7 @@ public class FaceCheckActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facecheck);
-        /*StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectDiskReads().detectDiskWrites().detectNetwork()
-                .penaltyLog().build());
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()
-                .penaltyLog().penaltyDeath().build());*/
+
         initData();
         setBackData();
     }
@@ -85,18 +81,9 @@ public class FaceCheckActivity extends Activity {
 
         }
         textView.setText(res);
-        Uri uri = Uri.fromFile(file1);
-        ContentResolver cr = this.getContentResolver();
-        //            Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
+//        Uri uri = Uri.fromFile(file1);
+//        ContentResolver cr = this.getContentResolver();
 
-//        Resources resources = this.getResources();
-//        DisplayMetrics dm = resources.getDisplayMetrics();
-        //float density1 = dm.density;
-//        int width = dm.widthPixels;
-//        int height = dm.heightPixels;
-
-//        Log.i("width", width+"");
-//        Log.i("height",height+"");
         Bitmap bitmap = BitmapUtils.decodeSampledBitmapFromFile(file1.getAbsolutePath(),500,800);
         imageView.setImageBitmap(bitmap);
 
@@ -124,11 +111,14 @@ public class FaceCheckActivity extends Activity {
                 oks.show(FaceCheckActivity.this);
             }
         });
+
+        back_intent=new Intent(this,TabMyWorks.class);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //因为我们在initData中已经将传输过来的数据放在intent中，所以这里我们直接用intent即可
-                setResult(RESULT_OK,intent);
+                setResult(RESULT_OK,back_intent);
                 finish();
             }
         });

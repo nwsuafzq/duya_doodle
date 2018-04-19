@@ -29,13 +29,23 @@
             android:textColor="#fff"
             android:textSize="16sp"/>
 
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/scanner_toolbar_more"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingRight="20dp"
             android:src="@mipmap/abc_ic_menu_moreoverflow_mtrl_alpha"/>
-
+        -->
+        <Button
+            android:id="@+id/btn_album"
+            android:layout_width="40dip"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
+            android:background="?attr/selectableItemBackground"
+            android:text="相册"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 

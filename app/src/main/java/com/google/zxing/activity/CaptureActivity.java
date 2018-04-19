@@ -3,7 +3,6 @@ package com.google.zxing.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
@@ -11,18 +10,17 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.os.Vibrator;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -46,13 +44,15 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import cn.edu.chd.yitu.R;
+import cn.edu.chd.utils.Constant;
 
+import cn.edu.chd.utils.UriString;
+import cn.edu.chd.yitu.R;
 
 /**
  * Initial the camera
  *
- * @author Ryan.Tang
+ * @author ZhangQiong
  */
 public class CaptureActivity extends AppCompatActivity implements Callback {
 
@@ -72,9 +72,15 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
     private ProgressDialog mProgress;
     private String photo_path;
     private Bitmap scanBitmap;
+
+    private Button btnAlbum; // 相册
+    private ImageButton btnFlash;
     //	private Button cancelScanButton;
     public static final int RESULT_CODE_QR_SCAN = 0xA1;
     public static final String INTENT_EXTRA_KEY_QR_SCAN = "qr_scan_result";
+
+    private boolean isFlashOn = false;
+
     /**
      * Called when the activity is first created.
      */
@@ -96,11 +102,18 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
 
+        btnAlbum = (Button) findViewById(R.id.btn_album);
+        btnAlbum.setOnClickListener(albumOnClick);
         //添加toolbar
 //        addToolbar();
+
+        btnFlash = (ImageButton) findViewById(R.id.btn_flash);
+        btnFlash.setOnClickListener(flashListener);
     }
 
-    private void addToolbar() {
+
+
+   /* private void addToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        ImageView more = (ImageView) findViewById(R.id.scanner_toolbar_more);
 //        assert more != null;
@@ -111,7 +124,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
 //            }
 //        });
         setSupportActionBar(toolbar);
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,63 +132,112 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         return true;
     }
 
-    @Override
+    private View.OnClickListener albumOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            //打开手机中的相册
+            Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT);
+            innerIntent.setType("image/*");
+            startActivityForResult(innerIntent, REQUEST_CODE_SCAN_GALLERY);
+        }
+    };
+
+    //@Override
+
+
+/*
     public boolean onOptionsItemSelected(MenuItem item) {
 //        switch (item.getItemId()){
 //            case R.id.scan_local:
 //                //打开手机中的相册
 //                Intent innerIntent = new Intent(Intent.ACTION_GET_CONTENT); //"android.intent.action.GET_CONTENT"
-//                innerIntent.setType("image/*");
+//                innerIntent.setType("image");
 //                Intent wrapperIntent = Intent.createChooser(innerIntent, "选择二维码图片");
 //                this.startActivityForResult(wrapperIntent, REQUEST_CODE_SCAN_GALLERY);
 //                return true;
 //        }
         return super.onOptionsItemSelected(item);
     }
+*/
+
+    /**
+     * 处理选择的图片
+     *
+     * @param data
+     */
+    private void handleAlbumPic(Intent data) {
+        //获取选中图片的路径
+        photo_path = UriString.getRealPathFromURI(CaptureActivity.this, data.getData());
+        Log.i("photo_path1", photo_path);
+//        photo_path = "/storage/emulated/0/yitu/111a.png";
+        mProgress = new ProgressDialog(CaptureActivity.this);
+        mProgress.setMessage("正在扫描...");
+        mProgress.setCancelable(false);
+        mProgress.show();
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mProgress.dismiss();
+                Result result = scanningImage(photo_path);
+                if (result != null) {
+                    Intent resultIntent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.INTENT_EXTRA_KEY_QR_SCAN, result.getText());
+
+                    resultIntent.putExtras(bundle);
+                    CaptureActivity.this.setResult(RESULT_CODE_QR_SCAN, resultIntent);
+                    finish();
+                } else {
+                    Toast.makeText(CaptureActivity.this, "识别失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void handleMyWorksPic(String path) {
+        //获取选中图片的路径
+        photo_path = path;
+        Log.i("photo_path1", photo_path);
+//        photo_path = "/storage/emulated/0/yitu/111a.png";
+        mProgress = new ProgressDialog(CaptureActivity.this);
+        mProgress.setMessage("正在扫描...");
+        mProgress.setCancelable(false);
+        mProgress.show();
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mProgress.dismiss();
+                Result result = scanningImage(photo_path);
+                if (result != null) {
+                    Intent resultIntent = new Intent();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.INTENT_EXTRA_KEY_QR_SCAN, result.getText());
+
+                    resultIntent.putExtras(bundle);
+                    CaptureActivity.this.setResult(RESULT_CODE_QR_SCAN, resultIntent);
+                    finish();
+                } else {
+                    Toast.makeText(CaptureActivity.this, "识别失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     @Override
     protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
-        if (requestCode==RESULT_OK) {
+
+        if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_SCAN_GALLERY:
-                    //获取选中图片的路径
-                    Cursor cursor = getContentResolver().query(data.getData(), null, null, null, null);
-                    if (cursor.moveToFirst()) {
-                        photo_path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-                    }
-                    cursor.close();
-
-                    mProgress = new ProgressDialog(CaptureActivity.this);
-                    mProgress.setMessage("正在扫描...");
-                    mProgress.setCancelable(false);
-                    mProgress.show();
-
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Result result = scanningImage(photo_path);
-                            if (result != null) {
-//                                Message m = handler.obtainMessage();
-//                                m.what = R.id.decode_succeeded;
-//                                m.obj = result.getText();
-//                                handler.sendMessage(m);
-                                Intent resultIntent = new Intent();
-                                Bundle bundle = new Bundle();
-                                bundle.putString(INTENT_EXTRA_KEY_QR_SCAN ,result.getText());
-//                                Logger.d("saomiao",result.getText());
-//                                bundle.putParcelable("bitmap",result.get);
-                                resultIntent.putExtras(bundle);
-                                CaptureActivity.this.setResult(RESULT_CODE_QR_SCAN, resultIntent);
-
-                            } else {
-                                Message m = handler.obtainMessage();
-                                m.what = R.id.decode_failed;
-                                m.obj = "Scan failed!";
-                                handler.sendMessage(m);
-                            }
-                        }
-                    }).start();
+                    handleAlbumPic(data);
                     break;
+               /* case 110:
+                    handleMyWorksPic(data.getStringExtra("path"));
+                    break;*/
+
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -183,11 +245,12 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
 
     /**
      * 扫描二维码图片的方法
+     *
      * @param path
      * @return
      */
     public Result scanningImage(String path) {
-        if(TextUtils.isEmpty(path)){
+        if (TextUtils.isEmpty(path)) {
             return null;
         }
         Hashtable<DecodeHintType, String> hints = new Hashtable<>();
@@ -207,11 +270,7 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
         QRCodeReader reader = new QRCodeReader();
         try {
             return reader.decode(bitmap1, hints);
-        } catch (NotFoundException e) {
-            e.printStackTrace();
-        } catch (ChecksumException e) {
-            e.printStackTrace();
-        } catch (FormatException e) {
+        } catch (NotFoundException | ChecksumException | FormatException e) {
             e.printStackTrace();
         }
         return null;
@@ -384,5 +443,30 @@ public class CaptureActivity extends AppCompatActivity implements Callback {
             mediaPlayer.seekTo(0);
         }
     };
-
+    /**
+     * 闪光灯开关按钮
+     */
+    private View.OnClickListener flashListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            try {
+                boolean isSuccess = CameraManager.get().setFlashLight(!isFlashOn);
+                if (!isSuccess) {
+                    Toast.makeText(CaptureActivity.this, "暂时无法开启闪光灯", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (isFlashOn) {
+                    // 关闭闪光灯
+                    btnFlash.setImageResource(R.drawable.flash_off);
+                    isFlashOn = false;
+                } else {
+                    // 开启闪光灯
+                    btnFlash.setImageResource(R.drawable.flash_on);
+                    isFlashOn = true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 }

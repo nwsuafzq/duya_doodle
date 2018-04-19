@@ -117,11 +117,15 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
 
     private View view;
 
+    private TextView qita;
+
+    private long timeclick=0;
+    private static int clickCounts=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_settings);
-
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -136,6 +140,14 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
 
 
         MobSDK.init(this);
+        qita=findViewById(R.id.qita);
+        qita.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickStyle();
+                System.out.println("11");
+            }
+        });
 
     }
 
@@ -495,6 +507,7 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
         UIHandler.sendMessage(msg, this);
     }*/
 
+
     @Override
     public boolean handleMessage(Message msg) {
         switch (msg.what) {
@@ -525,6 +538,42 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
     @Override
     public void onCancel(Platform platform, int i) {
 
+    }
+
+
+    private void clickStyle()
+    {
+        if (timeclick == 0)
+        {
+            timeclick = System.currentTimeMillis();
+            clickCounts = 0;
+        } else
+        {
+            if (System.currentTimeMillis() - timeclick < 500)    //计算两次单击的时间差
+            {
+                clickCounts++;
+                if (clickCounts == 2)
+                {
+                    timeclick = System.currentTimeMillis();
+                    //CustomToast.makeTextSucess(getApplicationContext(), "", "在按2次就可以进入设置页面了");
+                } else if (clickCounts == 3)
+                {
+                    timeclick = System.currentTimeMillis();
+                    //CustomToast.makeTextSucess(getApplicationContext(), "", "在按1次就可以进入设置页面了");
+                } else if (clickCounts == 4)
+                {
+//                    System.out.println("2222");
+                    Intent intent = new Intent(this, WebcaidanActivity.class);
+                    startActivity(intent);
+                    timeclick = System.currentTimeMillis();
+                    clickCounts = 0;
+                }
+            } else
+            {
+                timeclick = System.currentTimeMillis();
+                clickCounts = 0;
+            }
+        }
     }
 }
 

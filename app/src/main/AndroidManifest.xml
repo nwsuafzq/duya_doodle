@@ -22,9 +22,10 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限 -->
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -90,14 +91,24 @@
 
         <activity android:name=".FaceCheckActivity" />
         <activity android:name=".QRScaner">
-            <!--<intent-filter>
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
+            -->
 
         </activity>
-        <activity android:name="com.google.zxing.activity.CaptureActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity
+            android:name="com.google.zxing.activity.CaptureActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name="com.google.zxing.activity.CaptureWorksActivity"
+            android:label="@string/title_activity_capture_works" />
+        <activity
+            android:name=".WebcaidanActivity"
+            android:label="@string/title_activity_webcaidan"></activity>
     </application>
 
 </manifest>

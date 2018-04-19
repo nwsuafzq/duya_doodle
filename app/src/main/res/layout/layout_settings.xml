@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:orientation="horizontal"
-            android:paddingBottom="5dp" >
+            android:paddingBottom="5dp">
 
             <TextView
                 android:layout_width="40dp"
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="40dp"
@@ -119,18 +119,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" >
-        </cn.edu.chd.view.YiSettingButton>
+            android:layout_marginRight="10dp"></cn.edu.chd.view.YiSettingButton>
 
         <cn.edu.chd.view.YiSettingButton
             android:id="@+id/ysb_shake_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" >
-        </cn.edu.chd.view.YiSettingButton>
+            android:layout_marginRight="10dp"></cn.edu.chd.view.YiSettingButton>
 
         <TextView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -182,6 +181,7 @@
             android:text="推荐给朋友"
             android:textColor="#000000"
             android:textSize="15sp" />
+
         <Button
             android:id="@+id/but_qrscan"
             android:layout_width="match_parent"
@@ -194,6 +194,7 @@
             android:text="扫一扫"
             android:textColor="#000000"
             android:textSize="15sp" />
+
         <Button
             android:id="@+id/but_about"
             android:layout_width="match_parent"
@@ -206,6 +207,16 @@
             android:text="@string/str_about"
             android:textColor="#000000"
             android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/qita"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="v2.1.0"
+            android:textColor="#000000" />
     </LinearLayout>
+
 
 </LinearLayout>

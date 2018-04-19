@@ -1,7 +1,7 @@
 package cn.edu.chd.yitu;
 
 import java.io.File;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +23,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+
+import com.google.zxing.activity.CaptureActivity;
+import com.google.zxing.activity.CaptureWorksActivity;
 
 import cn.edu.chd.adapter.YiImageAdapter;
 import cn.edu.chd.utils.FileCopy;
@@ -116,10 +119,16 @@ public class TabMyWorks extends Fragment {
                 return true;
             case R.id.id_menu_works_share: //分享
                 share(info.position);
-            case R.id.id_menu_works_face:
+                return true;
+            case R.id.id_menu_works_scan:
+                scan(info.position);
+                return true;
+            case R.id.id_menu_works_face: //颜值
                 faceCheck(info.position);
+                return true;
             default:
                 return super.onContextItemSelected(item);
+
         }
 
     }
@@ -135,27 +144,18 @@ public class TabMyWorks extends Fragment {
         ChooseModel activity = (ChooseModel) getActivity();
         activity.getAdapter().reLoad();
     }
+
     /**
      * 分享作品
      */
-    private void share(int position){
-
+    private void share(int position) {
 
 
         File fileUri = new File(imageNames.get(position));
-        Log.i("dwad",fileUri.toString());
+//        Log.i("dwad", fileUri.toString());
         Uri imgUri = Uri.fromFile(fileUri);
 
-        /*Intent intent=new Intent();
-        intent.setClass(getContext(),TtActivity.class);
-        //利用bundle来存取数据
-        Bundle bundle=new Bundle();
-        String fileUri1=fileUri.toString();
-        //bundle.putDouble("height",height);
-        bundle.putString("fileUri1",fileUri1);
-        //再把bundle中的数据传给intent，以传输过去
-        intent.putExtras(bundle);
-        startActivityForResult(intent,0);*/
+
 
 
         Intent shareIntent = new Intent();
@@ -166,84 +166,42 @@ public class TabMyWorks extends Fragment {
         startActivity(Intent.createChooser(shareIntent, "分享到"));
 
     }
-    private void faceCheck(int position){
+
+    private void faceCheck(int position) {
 //       int i=FileCopy.CopySdcardFile("file:///android_asset/welcome.jpg", YiUtils.getTempPath()+"/sb.jpg");
 
 
-        Log.i("adasda","oooo");
+//        Log.i("adasda", "oooo");
 //       Log.i("fdsf",i+YiUtils.getTempPath()+"sb.jpg");
-
 
 
         File file = new File(imageNames.get(position));
 
-        Intent intent=new Intent();
-        intent.setClass(getContext(),FaceCheckActivity.class);
+        Intent intent = new Intent();
+        intent.setClass(getContext(), FaceCheckActivity.class);
         //利用bundle来存取数据
-        Bundle bundle=new Bundle();
-        String fileUri1=file.toString();
+        Bundle bundle = new Bundle();
+        String fileUri1 = file.toString();
         //bundle.putDouble("height",height);
-        bundle.putString("fileUri1",fileUri1);
+        bundle.putString("fileUri1", fileUri1);
         //再把bundle中的数据传给intent，以传输过去
         intent.putExtras(bundle);
-        startActivityForResult(intent,0);
-        /*ArrayList faceResult = new ArrayList();
-        try {
-            faceResult = FaceTest.faceTest(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (faceResult.size()==0){
-            Toast.makeText(getActivity(),"恐怕这个图片太大了，换一张试试吧",Toast.LENGTH_LONG).show();
-
-        }else if (faceResult.get(0).equals("0")){
-            Toast.makeText(getActivity(),"貌似这里没有人类的脸啊??",Toast.LENGTH_LONG).show();
-        }else {
-        *//*AlertDialog.Builder dialog =new AlertDialog.Builder(getActivity());
-        dialog.setTitle("ABCD123");
-        dialog.setMessage("aaaa");
-        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        dialog.show();*//*
-            Toast.makeText(getActivity(), "性别:" + faceResult.get(0) + "\n年龄:" + faceResult.get(1) + "\n颜值分:\n女性角度 " + faceResult.get(2) + "\n男性角度 " + faceResult.get(3), Toast.LENGTH_LONG).show();
-
-        }*/
+        startActivityForResult(intent, 0);
     }
-    /*private static String insertImageToSystem(Context context, String imagePath) {
-        String url = "";
-        try {
-            url = MediaStore.Images.Media.insertImage(context.getContentResolver(), imagePath, "20180322_092123.jpg", "你对图片的描述");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace() ;
-        }
-        return url;
-    }*/
-    /*private void shareImg(String dlgTitle, String subject, String content,
-                          Uri uri) {
-        if (uri == null) {
-            return;
-        }
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("image");
-        intent.putExtra(Intent.EXTRA_STREAM, uri);
-        if (subject != null && !"".equals(subject)) {
-            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        }
-        if (content != null && !"".equals(content)) {
-            intent.putExtra(Intent.EXTRA_TEXT, content);
-        }
 
-        // 设置弹出框标题
-        if (dlgTitle != null && !"".equals(dlgTitle)) { // 自定义标题
-            startActivity(Intent.createChooser(intent, dlgTitle));
-        } else { // 系统默认标题
-            startActivity(intent);
-        }
-    }*/
+    private void scan(int position) {
+        File file = new File(imageNames.get(position));
+//        Intent scan_intent=new Intent();
+//        Bundle scan_bundle=new Bundle();
+//        scan_bundle.putString("fileUri1",fileUri1);
+
+        Intent scanIntent = new Intent(getContext(), CaptureWorksActivity.class);
+        scanIntent.putExtra("path", file.toString());
+        startActivityForResult(scanIntent, 0);
+
+    }
+
+
     /**
      * 编辑作品
      *
