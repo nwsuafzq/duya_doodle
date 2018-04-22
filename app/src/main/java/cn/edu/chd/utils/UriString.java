@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-/**
+/** 通过Uri获取路径
  * Created by ZhangQiong.
  */
 

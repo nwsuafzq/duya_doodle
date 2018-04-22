@@ -483,30 +483,6 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
     public void onLongPress(MotionEvent e) {
     }
 
-    //-----------------share sdk 部分----------------------------------
-    /*@Override
-    public void onCancel(Platform arg0, int arg1) {
-        Message msg = Message.obtain();
-        msg.what = 0;
-        UIHandler.sendMessage(msg, this);
-    }
-
-
-    @Override
-    public void onComplete(Platform arg0, int arg1, HashMap<String, Object> arg2) {
-        Message msg = Message.obtain();
-        msg.what = 1;
-        UIHandler.sendMessage(msg, this);
-    }
-
-
-    @Override
-    public void onError(Platform arg0, int arg1, Throwable arg2) {
-        Message msg = Message.obtain();
-        msg.what = -1;
-        UIHandler.sendMessage(msg, this);
-    }*/
-
 
     @Override
     public boolean handleMessage(Message msg) {

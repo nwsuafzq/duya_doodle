@@ -5,7 +5,7 @@
         android:toAlpha="0"
         android:duration="500"
         />
-	<translate 
+	<translate
 	    android:fromXDelta="0"
 	    android:toXDelta="-100%p"
 	    android:duration="500"
