@@ -207,15 +207,26 @@
             android:text="@string/str_about"
             android:textColor="#000000"
             android:textSize="15sp" />
-
-        <TextView
+        <Button
+            android:id="@+id/caidan"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/setting_button"
+            android:gravity="left|center_vertical"
+            android:paddingStart="20dp"
+            android:text="v2.1.1"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+        <!--<TextView
             android:id="@+id/qita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="v2.1.0"
-            android:textColor="#000000" />
+            android:textColor="#000000" />-->
     </LinearLayout>
 
 

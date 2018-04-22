@@ -117,7 +117,7 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
 
     private View view;
 
-    private TextView qita;
+    private Button caidan;
 
     private long timeclick=0;
     private static int clickCounts=0;
@@ -140,14 +140,7 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
 
 
         MobSDK.init(this);
-        qita=findViewById(R.id.qita);
-        qita.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickStyle();
-                System.out.println("11");
-            }
-        });
+
 
     }
 
@@ -250,6 +243,14 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
         but_user_guide.setOnClickListener(this);
         but_qrscan.setOnClickListener(this);
 
+        caidan=findViewById(R.id.caidan);
+        caidan.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickStyle();
+
+            }
+        });
     }
 
     /*

@@ -81,6 +81,8 @@ dependencies {
     compile 'com.google.zxing:core:3.3.0'
     //butterknife注解框架
     compile 'com.jakewharton:butterknife:8.2.1'
-    //    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+//    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
+    //    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
 }
