@@ -108,7 +108,14 @@
             android:label="@string/title_activity_capture_works" />
         <activity
             android:name=".WebcaidanActivity"
-            android:label="@string/title_activity_webcaidan"></activity>
+            android:label="@string/title_activity_webcaidan" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".RegisterActivity"
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

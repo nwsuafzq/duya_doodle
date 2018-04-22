@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="cn.edu.chd.yitu.RegisterActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="用户名注册 "
+        android:textColor="#ffffff"
+        android:textSize="19dp"
+        android:gravity="center"
+        android:id="@+id/textView"
+        android:background="@drawable/camera"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <EditText
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/passWord"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="49dp"
+        android:ems="10"
+        android:hint="请填写您的用户名"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/passWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/userName"
+        android:layout_centerVertical="true"
+
+        android:ems="10"
+        android:hint="请填写您的密码"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/reg_button"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/imageView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="58dp"
+        android:background="@drawable/zhuce"
+        android:text="注册"
+        android:textColor="#ffffff"
+        android:textSize="15dp" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="85dp"
+        android:id="@+id/imageView4"
+        android:background="@drawable/caihong"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
+    <ImageButton
+        android:id="@+id/fanhui_button"
+        android:layout_width="20dp"
+        android:layout_height="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/fanhuibutton"
+        android:gravity="center" />
+
+
+</RelativeLayout>

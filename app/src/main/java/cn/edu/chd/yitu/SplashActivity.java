@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import cn.edu.chd.utils.BitmapUtils;
@@ -60,6 +63,31 @@ public class SplashActivity extends Activity {
         splash_iv = (ImageView) findViewById(R.id.splash_iv);
         splash_iv.setImageBitmap(BitmapUtils.decodeSampledBitmapFromResource(
                 getResources(), R.raw.welcome, reqWidth, reqHeight));
+
+        /*final View view =View.inflate(this,R.layout.layout_splash,null);
+        setContentView(view);
+        AlphaAnimation aa=new AlphaAnimation(0.3f,1.0f);
+        aa.setDuration(2000);
+
+        view.setAnimation(aa);
+        aa.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });*/
+
+
     }
 
     /**
@@ -85,7 +113,7 @@ public class SplashActivity extends Activity {
      * 进入引导界面
      */
     public void goGuide() {
-        Intent intent = new Intent(this, UserGuide.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         this.startActivity(intent);
         overridePendingTransition(R.anim.slide_remain, R.anim.alpha_1_to_0);
         this.finish();

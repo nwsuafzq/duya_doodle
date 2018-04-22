@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context="cn.edu.chd.yitu.LoginActivity">
+
+
+
+    <EditText
+        android:id="@+id/userName_loginActivity"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@+id/passWord_loginActivity_et"
+        android:layout_alignStart="@+id/passWord_loginActivity_et"
+        android:ems="10"
+        android:hint="用户名："
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/passWord_loginActivity_et"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="13dp"
+        android:ems="10"
+        android:hint="密码："
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/shualianbutton"
+        android:layout_alignStart="@+id/passWord_loginActivity_et"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/camera"
+        android:text="登  录"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/shualianbutton"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+
+        android:layout_above="@+id/reg_button_login"
+        android:layout_alignStart="@+id/passWord_loginActivity_et"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/camera"
+        android:text="刷  脸  登  录"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+
+
+    <Button
+        android:id="@+id/reg_button_login"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:text="注册"
+        android:textColor="#ffffff"
+        android:textSize="19dp"
+        android:background="@drawable/zhuce"
+
+        android:layout_marginBottom="66dp"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="ZQ小度工作室制作"
+        android:id="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="登 录"
+        android:textColor="#ffffff"
+        android:textSize="19dp"
+        android:gravity="center"
+        android:id="@+id/textView3"
+        android:background="@drawable/camera"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:background="@drawable/ic_launcher"
+        android:fontFamily="serif"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
+
+
+</RelativeLayout>

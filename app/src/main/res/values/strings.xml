@@ -47,6 +47,7 @@
     <string name="share">分享</string>
     <string name="title_activity_capture_works">CaptureWorksActivity</string>
     <string name="title_activity_webcaidan">WebcaidanActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 
 </resources>
