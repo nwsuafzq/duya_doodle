@@ -33,7 +33,7 @@ public class RegisterActivity extends Activity {
      * url地址(根据你服务器的地址进行设置,主要是设置http://or9574ay.xicp.net:8888这里,or9574ay.xicp.
      * net对应的是你本机的ip地址,比如192.168.1.1,8888是端口号,tomcat默认是8080)
      */
-    private String url = "http://nwafu.me/RegisterAndLogin/RegisterServlet";
+    private String url = "http://nwafulive.cn/RegisterAndLogin/RegisterServlet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

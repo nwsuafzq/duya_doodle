@@ -24,7 +24,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private String name;// 用户名
     private String pwd;// 密码
 
-    private String url = "http://nwafu.me/RegisterAndLogin/LoginServlet";
+    private String url = "http://nwafulive.cn/RegisterAndLogin/LoginServlet";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
