@@ -155,9 +155,6 @@ public class TabMyWorks extends Fragment {
 //        Log.i("dwad", fileUri.toString());
         Uri imgUri = Uri.fromFile(fileUri);
 
-
-
-
         Intent shareIntent = new Intent();
         shareIntent.setType("image*//*");
         shareIntent.setAction(Intent.ACTION_SEND);
@@ -167,13 +164,8 @@ public class TabMyWorks extends Fragment {
 
     }
 
+    /*人脸检测颜值*/
     private void faceCheck(int position) {
-//       int i=FileCopy.CopySdcardFile("file:///android_asset/welcome.jpg", YiUtils.getTempPath()+"/sb.jpg");
-
-
-//        Log.i("adasda", "oooo");
-//       Log.i("fdsf",i+YiUtils.getTempPath()+"sb.jpg");
-
 
         File file = new File(imageNames.get(position));
 

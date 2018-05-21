@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">度鸦(小度涂鸦)</string>
+    <string name="app_name">Yilia</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="str_back">返回</string>
-    <string name="str_yitu">ZQ小度涂鸦</string>
+    <string name="str_yitu">Yilia</string>
     <string name="str_canvas_setting">画布设置</string>
     <string name="canvas_width">宽度</string>
     <string name="canvas_height">高度</string>

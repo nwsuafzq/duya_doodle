@@ -117,7 +117,7 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
 
     private View view;
 
-    private Button caidan;
+    private Button caidan;  //彩蛋按钮 （版本号按钮）
 
     private long timeclick=0;
     private static int clickCounts=0;
@@ -354,7 +354,7 @@ public class Settings extends Activity implements OnCheckChangedListener, OnSeek
         oks.disableSSOWhenAuthorize();
 
         // title标题，微信、QQ和QQ空间等平台使用
-        oks.setTitle("ZQ小度涂鸦APP");
+        oks.setTitle("张琼的涂鸦APP");
         // titleUrl QQ和QQ空间跳转链接
         oks.setTitleUrl("http://www.nwafu.me");
         // text是分享文本，所有平台都需要这个字段
